@@ -37,7 +37,7 @@ def check_performance_metrics(metrics, thresholds=None):
     for tk, mk in [("min_accuracy", "test_accuracy"), ("min_f1_score", "test_f1_score"),
                    ("min_auc_roc", "test_auc_roc")]:
         if tk not in t: continue
-        tv, av = t[tk], metrics.get(mk_ 0.0)
+        tv, av = t[tk], metrics.get(mk, 0.0)
         results.append(ValidationResult(name=f"Perf: {mk}", passed=av>=tv, actual_value=av, threshold=tv))
     return results
 
