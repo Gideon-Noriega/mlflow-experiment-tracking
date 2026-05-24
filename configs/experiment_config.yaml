@@ -1,0 +1,42 @@
+experiment:
+  name: customer-churn
+  description: "Customer churn prediction for SaaS platform"
+  tags:
+    team: ml-platform
+    domain: customer-success
+    use_case: churn-prediction
+
+data:
+  features:
+    numerical:
+      - tenure_months
+      - monthly_charges
+      - total_charges
+      - num_support_tickets
+      - days_since_last_login
+      - num_logins_last_30d
+      - contract_value
+      - num_products
+    categorical:
+      - contract_type
+      - payment_method
+      - subscription_tier
+      - onboarding_completed
+  target: churned
+
+model:
+  registry_name: customer-churn-model
+  validation:
+    min_accuracy: 0.80
+    min_f1_score: 0.75
+    min_auc_roc: 0.82
+    max_inference_time_ms: 50
+    min_sample_size: 1000
+
+serving:
+  champion_alias: champion
+  challenger_alias: challenger
+  ab_test:
+    champion_weight: 0.9
+    challenger_weight: 0.1
+    min_observations: 500
